@@ -69,6 +69,7 @@ public class EntityPlayerSP extends EntityPlayer {
 	 * burn.
 	 */
 	public void onLivingUpdate() {
+
 		if (this.sprintingTicksLeft > 0) {
 			--this.sprintingTicksLeft;
 

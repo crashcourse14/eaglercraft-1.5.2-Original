@@ -1,5 +1,10 @@
 package net.minecraft.src;
 
+import net.polarclient.event.events.EventUpdates;
+import net.polarclient.event.EventManager;
+import net.polarclient.event.Event;
+
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -162,6 +167,11 @@ public class EntityPlayerMP extends EntityPlayer implements ICrafting {
 	 * Called to update the entity's position/logic.
 	 */
 	public void onUpdate() {
+
+		EventManager event = new EventUpdates();
+
+		event.call();
+
 		this.theItemInWorldManager.updateBlockRemoving();
 		--this.ticksOfInvuln;
 		this.openContainer.detectAndSendChanges();
