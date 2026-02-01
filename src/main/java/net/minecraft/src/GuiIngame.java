@@ -484,7 +484,6 @@ public class GuiIngame extends Gui {
 		}else {
 			EaglerAdapter.glPushMatrix();
 			EaglerAdapter.glScalef(0.75f, 0.75f, 0.75f);
-			var8.drawStringWithShadow(this.mc.renderGlobal.getDebugInfoShort(), 2, 2, 16777215);
 
 			if(mc.gameSettings.showCoordinates) {
 				var8.drawStringWithShadow("x: "+MathHelper.floor_double(this.mc.thePlayer.posX)+", y: "+MathHelper.floor_double(this.mc.thePlayer.posY)+", z: "+MathHelper.floor_double(this.mc.thePlayer.posZ), 2, 12, 16777215);

@@ -7,17 +7,17 @@ public class CoordinatesMod extends HudMod {
 
 
     public CoordinatesMod() {
-        super("Coordinates", 5, 20);
+        super("Coordinates", 5, 25);
     }
 
     @Override 
     public void draw() {
-        fr.drawStringWithShadow(name + " X: " + Math.round(mc.thePlayer.posX * 1000.0) / 1000.0 + " Y: " + Math.round(mc.thePlayer.posY * 1000.0) / 1000.0 + " Z: " + Math.round(mc.thePlayer.posZ * 1000.0) / 1000.0, getX(), getY(), -1);
+        fr.drawStringWithShadow("§6[§eCoordinates§6] §fX: " + Math.round(mc.thePlayer.posX * 1000.0) / 1000.0 + " Y: " + Math.round(mc.thePlayer.posY * 1000.0) / 1000.0 + " Z: " + Math.round(mc.thePlayer.posZ * 1000.0) / 1000.0, getX(), getY(), -1);
         super.draw();
     }
 
     public int getWidth() {
-        return fr.getStringWidth(name);
+        return fr.getStringWidth("§6[§eCoordinates§6] §fX: " + Math.round(mc.thePlayer.posX * 1000.0) / 1000.0 + " Y: " + Math.round(mc.thePlayer.posY * 1000.0) / 1000.0 + " Z: " + Math.round(mc.thePlayer.posZ * 1000.0) / 1000.0);
     }
 
     public int getHeight() {

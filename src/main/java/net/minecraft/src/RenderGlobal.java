@@ -421,10 +421,6 @@ public class RenderGlobal implements IWorldAccess {
 		return "C: " + this.renderersBeingRendered + "/" + this.renderersLoaded + ", F: " + this.renderersBeingClipped + ", O: " + this.renderersBeingOccluded + ", E: " + this.renderersSkippingRenderPass;
 	}
 	
-	public String getDebugInfoShort() {
-		return "" + Minecraft.debugFPS + "fps | C: " + this.renderersBeingRendered + "/" + this.renderersLoaded + ", E: " + this.countEntitiesRendered + "+" + tileEntities.size() +
-				", U: " + Minecraft.debugChunkGeometryUpdates + "/" + Minecraft.debugChunkUpdates;
-	}
 
 	/**
 	 * Gets the entities info for use on the Debug screen

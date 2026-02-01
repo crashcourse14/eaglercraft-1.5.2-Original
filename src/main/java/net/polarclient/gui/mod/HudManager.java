@@ -2,19 +2,22 @@ package net.polarclient.gui.mod;
 
 import java.util.ArrayList;
 
-import net.polarclient.gui.mod.mods.CoordinatesMod;
-import net.polarclient.gui.mod.mods.TestMod;
+import net.polarclient.gui.mod.mods.*;
 
 public class HudManager {
 
     public ArrayList<HudMod> hudMods = new ArrayList<>();
 
-    public TestMod testMod;
+    public ClientName clientName;
     public CoordinatesMod coordinatesMod;
+    public FpsMod fpsMod;
+    public Ping pingMod;
 
     public HudManager() {
-        hudMods.add(testMod = new TestMod());
+        hudMods.add(clientName = new ClientName());
         hudMods.add(coordinatesMod = new CoordinatesMod());
+        hudMods.add(fpsMod = new FpsMod());
+        hudMods.add(pingMod = new Ping());
 
     }
 
