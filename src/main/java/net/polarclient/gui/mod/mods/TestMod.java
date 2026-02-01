@@ -10,7 +10,7 @@ public class TestMod extends HudMod {
     public FontRenderer fr = mc.fontRenderer;
 
     public TestMod() {
-        super("§5[§dTest Mod§5]§f", 5, 5);
+        super("§1[§bTest Mod§1]§f", 5, 5);
     }
 
     @Override 
