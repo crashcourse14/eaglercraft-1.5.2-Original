@@ -15,7 +15,7 @@ public class VertexesMod extends HudMod {
 
     @Override 
     public void draw() {
-        fr.drawStringWithShadow("§6[§eVertexes: " + (EaglerAdapter.getVertexesPerSecond() / 1000) + "k§6]", getX(), getY(), -1);
+        fr.drawStringWithShadow("§6[§eVertexes: " + (EaglerAdapter.getVertexesPerSecond() / 1000) + "k§6]", getX(), getY(), 0);
         super.draw();
     }
 

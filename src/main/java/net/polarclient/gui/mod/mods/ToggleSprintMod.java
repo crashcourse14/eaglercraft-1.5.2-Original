@@ -32,12 +32,7 @@ public class ToggleSprintMod extends HudMod {
         }
 
         String text = toggled ? "§6[§eSprinting (Toggled)§6]" : "§6[§eNot Sprinting§6]";
-        fr.drawStringWithShadow(
-                text,
-                getX(),
-                getY(),
-                toggled ? 0x00FF00 : 0xFF5555
-        );
+        fr.drawStringWithShadow(text, getX(), getY(), 0);
     }
 
     @Override

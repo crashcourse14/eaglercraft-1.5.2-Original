@@ -15,7 +15,7 @@ public class TriangleMod extends HudMod {
 
     @Override 
     public void draw() {
-        fr.drawStringWithShadow("§6[§eTriangles: " + (EaglerAdapter.getTrianglesPerSecond() / 1000) + "k§6]", getX(), getY(), -1);
+        fr.drawStringWithShadow("§6[§eTriangles: " + (EaglerAdapter.getTrianglesPerSecond() / 1000) + "k§6]", getX(), getY(), 0);
         super.draw();
     }
 

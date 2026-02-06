@@ -14,7 +14,7 @@ public class FpsMod extends HudMod {
 
     @Override 
     public void draw() {
-        fr.drawStringWithShadow("§6[§e" + Minecraft.debugFPS + " FPS§6]", getX(), getY(), -1);
+        fr.drawStringWithShadow("§6[§e" + Minecraft.debugFPS + " FPS§6]", getX(), getY(), 0);
         super.draw();
     }
 

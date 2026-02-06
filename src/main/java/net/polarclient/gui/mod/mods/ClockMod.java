@@ -24,7 +24,7 @@ public class ClockMod extends HudMod {
         if (hour == 0) hour = 12; // midnight / noon fix
 
         String time = String.format(
-            "§6[§e%02d::%02d::%02d %s§6]§f",
+            "§6[§e%02d:%02d:%02d %s§6]§f",
             hour, minute, second,
             isPM ? "PM" : "AM"
         );
@@ -34,7 +34,7 @@ public class ClockMod extends HudMod {
 
     @Override
     public int getWidth() {
-        return fr.getStringWidth("§6[§e00::00::00 AM§6]§f");
+        return fr.getStringWidth("§6[§e00:00:00 AM§6]§f");
     }
 
     @Override

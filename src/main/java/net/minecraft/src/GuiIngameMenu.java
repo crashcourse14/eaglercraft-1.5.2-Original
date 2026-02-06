@@ -9,6 +9,7 @@ import net.lax1dude.eaglercraft.GuiVoiceMenu;
 import net.lax1dude.eaglercraft.IntegratedServer;
 import net.lax1dude.eaglercraft.IntegratedServerLAN;
 import net.minecraft.client.Minecraft;
+import net.polarclient.gui.hud.ModMenu;
 
 
 public class GuiIngameMenu extends GuiScreen {
@@ -83,6 +84,10 @@ public class GuiIngameMenu extends GuiScreen {
 			
 		case 8:
 			this.mc.displayGuiScreen(new GuiScreenSkinCapeSettings(this));
+			break;
+
+		case 10: 
+			this.mc.displayGuiScreen(new ModMenu());
 			break;
 		}
 	}

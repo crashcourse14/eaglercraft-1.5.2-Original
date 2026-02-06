@@ -22,7 +22,7 @@ public class DateMod extends HudMod {
 
         String date = String.format("§6[§e%04d-%02d-%02d§6]§f", year, month, day);
 
-        fr.drawStringWithShadow(date, getX(), getY(), -1);
+        fr.drawStringWithShadow(date, getX(), getY(), 0);
     }
 
     @Override

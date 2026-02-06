@@ -149,8 +149,10 @@ public class GuiMainMenu extends GuiScreen {
 		if(EaglerAdapter.isIntegratedServerAvailable()) {
 			this.buttonList.add(new GuiButton(1, this.width / 2 - 100, var4, var2.translateKey("menu.singleplayer")));
 			this.buttonList.add(new GuiButton(2, this.width / 2 - 100, var4 + 24 * 1, var2.translateKey("menu.multiplayer")));
+			this.buttonList.add(new GuiButton(3, this.width / 2 - 100, var4 + 24 * 2, var2.translateKey("menu.forkme")));
 		}else {
-			this.buttonList.add(new GuiButton(2, this.width / 2 - 100, var4, var2.translateKey("menu.multiplayer")));;
+			this.buttonList.add(new GuiButton(2, this.width / 2 - 100, var4, var2.translateKey("menu.multiplayer")));
+			this.buttonList.add(new GuiButton(3, this.width / 2 - 100, var4 + 24, var2.translateKey("menu.forkme")));
 		}
 
 		this.buttonList.add(new GuiButton(0, this.width / 2 - 100, var4 + 72 + 12, 98, 20, var2.translateKey("menu.options")));
@@ -501,7 +503,7 @@ public class GuiMainMenu extends GuiScreen {
 		this.drawTexturedModalRect(var6 + 0, var7 + 0, 0, 0, 155, 44);
 		this.drawTexturedModalRect(var6 + 155, var7 + 0, 0, 45, 155, 44);
 
-		this.drawString(this.fontRenderer, "Polarclient 1.5.2 (1.0)", 2, this.height - 20, 16777215);
+		this.drawString(this.fontRenderer, "minecraft 1.5.2", 2, this.height - 20, 16777215);
 		this.drawString(this.fontRenderer, ConfigConstants.mainMenuString + EnumChatFormatting.GRAY + " (cracked)", 2, this.height - 10, 16777215);
 
 		//String var10 = "Copyright " + Calendar.getInstance().get(Calendar.YEAR) + " Mojang AB.";

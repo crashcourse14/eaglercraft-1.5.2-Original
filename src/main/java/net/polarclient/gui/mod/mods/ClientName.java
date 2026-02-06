@@ -15,7 +15,7 @@ public class ClientName extends HudMod {
 
     @Override 
     public void draw() {
-        fr.drawStringWithShadow(name, getX(), getY(), -1);
+        fr.drawStringWithShadow(name, getX(), getY(), 0);
         super.draw();
     }
 
