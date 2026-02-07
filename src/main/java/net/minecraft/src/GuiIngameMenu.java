@@ -9,7 +9,7 @@ import net.lax1dude.eaglercraft.GuiVoiceMenu;
 import net.lax1dude.eaglercraft.IntegratedServer;
 import net.lax1dude.eaglercraft.IntegratedServerLAN;
 import net.minecraft.client.Minecraft;
-import net.polarclient.gui.hud.ModMenu;
+import net.liquidclient.gui.hud.ModMenu;
 
 
 public class GuiIngameMenu extends GuiScreen {

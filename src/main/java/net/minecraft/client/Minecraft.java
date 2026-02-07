@@ -5,8 +5,9 @@ import java.text.DecimalFormat;
 import java.util.HashSet;
 import java.util.List;
 
-import net.polarclient.Client;
-import net.polarclient.event.events.ClientTick;
+import net.liquidclient.Client;
+import net.liquidclient.event.events.ClientTick;
+import net.liquidclient.gui.hud.PostModMenu;
 
 import net.lax1dude.eaglercraft.DefaultSkinRenderer;
 import net.lax1dude.eaglercraft.EaglerAdapter;
@@ -88,8 +89,12 @@ import net.minecraft.src.TexturePackList;
 import net.minecraft.src.Timer;
 import net.minecraft.src.WorldClient;
 import net.minecraft.src.WorldSettings;
+import net.lax1dude.eaglercraft.TextureLocation;
+
 
 public class Minecraft implements Runnable {
+
+	private static final TextureLocation LIQUID_LOGO = new TextureLocation("/gui/LiquidClient/logo.png");
 	
 	private ServerData currentServerData;
 
@@ -363,6 +368,7 @@ public class Minecraft implements Runnable {
 	}
 	
 	private void showIntroAnimation() {
+
 		ScaledResolution var1 = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
 		EaglerAdapter.glClearColor(1.0F, 1.0F, 1.0F, 1.0F);
 		EaglerAdapter.glDisable(EaglerAdapter.GL_ALPHA_TEST);
@@ -377,32 +383,65 @@ public class Minecraft implements Runnable {
 		EaglerAdapter.glDisable(EaglerAdapter.GL_FOG);
 		EaglerAdapter.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		
+		/*
+		
+		CUSTOM LOADING SCREEN
+
+		*/
+
+
 		long t1 = System.currentTimeMillis();
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 200; i++) {
 			this.displayWidth = EaglerAdapter.getCanvasWidth();
 			this.displayHeight = EaglerAdapter.getCanvasHeight();
 			EaglerAdapter.glViewport(0, 0, this.displayWidth, this.displayHeight);
-			var1 = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
+
+			ScaledResolution sr = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
+
 			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_PROJECTION);
 			EaglerAdapter.glLoadIdentity();
-			EaglerAdapter.glOrtho(0.0F, var1.getScaledWidth(), var1.getScaledHeight(), 0.0F, 1000.0F, 3000.0F);
+			EaglerAdapter.glOrtho(0.0F, sr.getScaledWidth(), sr.getScaledHeight(), 0.0F, 1000.0F, 3000.0F);
 			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_MODELVIEW);
-			
-			float f = ((float)(System.currentTimeMillis() - t1) / 333f);
-			
+			EaglerAdapter.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 			EaglerAdapter.glClear(EaglerAdapter.GL_COLOR_BUFFER_BIT | EaglerAdapter.GL_DEPTH_BUFFER_BIT);
-			EaglerAdapter.glColor4f(1.0F, 1.0F, 1.0F, MathHelper.clamp_float(1.0f - f, 0.0F, 1.0F));
-			this.renderEngine.bindTexture("%clamp%/title/eagtek.png");
+
+			LIQUID_LOGO.bindTexture();
+
+			int logoWidth = 100; 
+			int logoHeight = 100; 
+			int logoX = (sr.getScaledWidth() - logoWidth) / 2; 
+			int logoY = (sr.getScaledHeight() / 2) - logoHeight; 
+
 			EaglerAdapter.glPushMatrix();
-			float f1 = 1.0f + 0.025f * f * f;
-			EaglerAdapter.glTranslatef((var1.getScaledWidth() - 256) / 2, (var1.getScaledHeight() - 256) / 2, 0.0f);
-			EaglerAdapter.glTranslatef(-128.0f * (f1 - 1.0f), -128.0f * (f1 - 1.0f) , 0.0f);
-			EaglerAdapter.glScalef(f1, f1, 1.0f);
-			this.scaledTessellator(0, 0, 0, 0, 256, 256);
+			EaglerAdapter.glTranslatef(logoX, logoY, 0.0f);
+			EaglerAdapter.glScalef(1.0f, 1.0f, 1.0f);
+
+			Tessellator tess = Tessellator.instance;
+			tess.startDrawingQuads();
+			tess.addVertexWithUV(0, logoHeight, 0, 0.0, 1.0);      
+			tess.addVertexWithUV(logoWidth, logoHeight, 0, 1.0, 1.0);  
+			tess.addVertexWithUV(logoWidth, 0, 0, 1.0, 0.0);       
+			tess.addVertexWithUV(0, 0, 0, 0.0, 0.0);              
+			tess.draw();
 			EaglerAdapter.glPopMatrix();
+
+			String text = "Starting Liquid Client...";
+			String DEV_Text = "Client developed by 983kk (Mainstream Studios)";
+
+			int TEXT_WIDTH = this.fontRenderer.getStringWidth(text);
+			int TEXT_X = (sr.getScaledWidth() - TEXT_WIDTH) / 2;
+			int TEXT_Y = logoY + logoHeight + 10; 
+
+			this.fontRenderer.drawString(text, TEXT_X, TEXT_Y, 0xFFFFFF); 
+
+			int DEV_X = 5; 
+			int DEV_Y = sr.getScaledHeight() - 5 - this.fontRenderer.FONT_HEIGHT; 
+
+			this.fontRenderer.drawString(DEV_Text, DEV_X, DEV_Y, 0xFFFFFF);
 
 			EaglerAdapter.glFlush();
 			EaglerAdapter.updateDisplay();
+
 			
 			long t = t1 + 17 + 17*i - System.currentTimeMillis();
 			if(t > 0) {
@@ -415,28 +454,53 @@ public class Minecraft implements Runnable {
 		}
 		
 		t1 = System.currentTimeMillis();
-		for(int i = 0; i < 20; i++) {
+		for(int i = 0; i < 200; i++) {
 			this.displayWidth = EaglerAdapter.getCanvasWidth();
 			this.displayHeight = EaglerAdapter.getCanvasHeight();
 			EaglerAdapter.glViewport(0, 0, this.displayWidth, this.displayHeight);
-			var1 = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
+
+			ScaledResolution sr = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
+
 			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_PROJECTION);
 			EaglerAdapter.glLoadIdentity();
-			EaglerAdapter.glOrtho(0.0F, var1.getScaledWidth(), var1.getScaledHeight(), 0.0F, 1000.0F, 3000.0F);
+			EaglerAdapter.glOrtho(0.0F, sr.getScaledWidth(), sr.getScaledHeight(), 0.0F, 1000.0F, 3000.0F);
 			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_MODELVIEW);
-			
-			float f = ((float)(System.currentTimeMillis() - t1) / 333f);
-			
+			EaglerAdapter.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 			EaglerAdapter.glClear(EaglerAdapter.GL_COLOR_BUFFER_BIT | EaglerAdapter.GL_DEPTH_BUFFER_BIT);
-			EaglerAdapter.glColor4f(1.0F, 1.0F, 1.0F, MathHelper.clamp_float(f, 0.0F, 1.0F));
-			this.renderEngine.bindTexture("%blur%/title/mojang.png");
+
+			LIQUID_LOGO.bindTexture();
+
+			int logoWidth = 100; 
+			int logoHeight = 100; 
+			int logoX = (sr.getScaledWidth() - logoWidth) / 2; 
+			int logoY = (sr.getScaledHeight() / 2) - logoHeight; 
+
 			EaglerAdapter.glPushMatrix();
-			float f1 = 0.875f + 0.025f * (float)Math.sqrt(f);
-			EaglerAdapter.glTranslatef((var1.getScaledWidth() - 256) / 2, (var1.getScaledHeight() - 256) / 2, 0.0f);
-			EaglerAdapter.glTranslatef(-128.0f * (f1 - 1.0f), -128.0f * (f1 - 1.0f) , 0.0f);
-			EaglerAdapter.glScalef(f1, f1, 1.0f);
-			this.scaledTessellator(0, 0, 0, 0, 256, 256);
+			EaglerAdapter.glTranslatef(logoX, logoY, 0.0f);
+			EaglerAdapter.glScalef(1.0f, 1.0f, 1.0f);
+
+			Tessellator tess = Tessellator.instance;
+			tess.startDrawingQuads();
+			tess.addVertexWithUV(0, logoHeight, 0, 0.0, 1.0);      
+			tess.addVertexWithUV(logoWidth, logoHeight, 0, 1.0, 1.0);  
+			tess.addVertexWithUV(logoWidth, 0, 0, 1.0, 0.0);       
+			tess.addVertexWithUV(0, 0, 0, 0.0, 0.0);              
+			tess.draw();
 			EaglerAdapter.glPopMatrix();
+
+			String text = "Starting Liquid Client...";
+			String DEV_Text = "Client developed by 983kk (Mainstream Studios)";
+
+			int TEXT_WIDTH = this.fontRenderer.getStringWidth(text);
+			int TEXT_X = (sr.getScaledWidth() - TEXT_WIDTH) / 2;
+			int TEXT_Y = logoY + logoHeight + 10; 
+
+			this.fontRenderer.drawString(text, TEXT_X, TEXT_Y, 0xFFFFFF); 
+;
+			int DEV_X = 5; 
+			int DEV_Y = sr.getScaledHeight() - 5 - this.fontRenderer.FONT_HEIGHT; 
+
+			this.fontRenderer.drawString(DEV_Text, DEV_X, DEV_Y, 0xFFFFFF);
 
 			EaglerAdapter.glFlush();
 			EaglerAdapter.updateDisplay();
@@ -458,28 +522,57 @@ public class Minecraft implements Runnable {
 		}
 
 		t1 = System.currentTimeMillis();
-		for(int i = 0; i < 21; i++) {
+		for(int i = 0; i < 200; i++) {
 			this.displayWidth = EaglerAdapter.getCanvasWidth();
 			this.displayHeight = EaglerAdapter.getCanvasHeight();
 			EaglerAdapter.glViewport(0, 0, this.displayWidth, this.displayHeight);
-			var1 = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
-			
-			float f = ((float)(System.currentTimeMillis() - t1) / 340f);
-			
+
+			ScaledResolution sr = new ScaledResolution(this.gameSettings, this.displayWidth, this.displayHeight);
+
+			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_PROJECTION);
+			EaglerAdapter.glLoadIdentity();
+			EaglerAdapter.glOrtho(0.0F, sr.getScaledWidth(), sr.getScaledHeight(), 0.0F, 1000.0F, 3000.0F);
+			EaglerAdapter.glMatrixMode(EaglerAdapter.GL_MODELVIEW);
+			EaglerAdapter.glClearColor(0.0F, 0.0F, 0.0F, 1.0F);
 			EaglerAdapter.glClear(EaglerAdapter.GL_COLOR_BUFFER_BIT | EaglerAdapter.GL_DEPTH_BUFFER_BIT);
-			EaglerAdapter.glColor4f(1.0F, 1.0F, 1.0F, MathHelper.clamp_float((1.0f - f), 0.0F, 1.0F));
-			this.renderEngine.bindTexture("%blur%/title/mojang.png");
+
+			LIQUID_LOGO.bindTexture();
+
+			int logoWidth = 100; 
+			int logoHeight = 100; 
+			int logoX = (sr.getScaledWidth() - logoWidth) / 2; 
+			int logoY = (sr.getScaledHeight() / 2) - logoHeight; 
+
 			EaglerAdapter.glPushMatrix();
-			float f1 = 0.9f + 0.025f * f * f;
-			EaglerAdapter.glTranslatef((var1.getScaledWidth() - 256) / 2, (var1.getScaledHeight() - 256) / 2, 0.0f);
-			EaglerAdapter.glTranslatef(-128.0f * (f1 - 1.0f), -128.0f * (f1 - 1.0f) , 0.0f);
-			EaglerAdapter.glScalef(f1, f1, 1.0f);
-			this.scaledTessellator(0, 0, 0, 0, 256, 256);
+			EaglerAdapter.glTranslatef(logoX, logoY, 0.0f);
+			EaglerAdapter.glScalef(1.0f, 1.0f, 1.0f);
+
+			Tessellator tess = Tessellator.instance;
+			tess.startDrawingQuads();
+			tess.addVertexWithUV(0, logoHeight, 0, 0.0, 1.0);      
+			tess.addVertexWithUV(logoWidth, logoHeight, 0, 1.0, 1.0);  
+			tess.addVertexWithUV(logoWidth, 0, 0, 1.0, 0.0);       
+			tess.addVertexWithUV(0, 0, 0, 0.0, 0.0);              
+			tess.draw();
 			EaglerAdapter.glPopMatrix();
+
+			String text = "Starting Liquid Client...";
+			String DEV_Text = "Client developed by 983kk (Mainstream Studios)";
+
+			int TEXT_WIDTH = this.fontRenderer.getStringWidth(text);
+			int TEXT_X = (sr.getScaledWidth() - TEXT_WIDTH) / 2;
+			int TEXT_Y = logoY + logoHeight + 10; 
+
+			this.fontRenderer.drawString(text, TEXT_X, TEXT_Y, 0xFFFFFF); 
+
+			int DEV_X = 5; 
+			int DEV_Y = sr.getScaledHeight() - 5 - this.fontRenderer.FONT_HEIGHT; 
+
+			this.fontRenderer.drawString(DEV_Text, DEV_X, DEV_Y, 0xFFFFFF);
 
 			EaglerAdapter.glFlush();
 			EaglerAdapter.updateDisplay();
-			
+
 			long t = t1 + 17 + 17*i - System.currentTimeMillis();
 			if(t > 0) {
 				try {
@@ -540,6 +633,7 @@ public class Minecraft implements Runnable {
 		EaglerAdapter.glAlphaFunc(EaglerAdapter.GL_GREATER, 0.1F);
 		EaglerAdapter.glFlush();
 		EaglerAdapter.updateDisplay();
+
 	}
 
 	/**
@@ -1299,6 +1393,14 @@ public class Minecraft implements Runnable {
 								this.displayInGameMenu();
 							}
 
+							if (EaglerAdapter.isKeyDown(54)) {
+								this.displayGuiScreen(new PostModMenu());
+							}
+
+							if (EaglerAdapter.getEventKeyState() && EaglerAdapter.getEventKey() == 54) {
+								this.displayGuiScreen(new PostModMenu());
+							}
+
 							if (F3down && EaglerAdapter.getEventKey() == 31) {
 								this.forceReload();
 							}
@@ -1334,6 +1436,10 @@ public class Minecraft implements Runnable {
 
 							if (this.gameSettings.keyBindFunction.pressed && EaglerAdapter.getEventKey() == 2) {
 								this.gameSettings.hideGUI = !this.gameSettings.hideGUI;
+							}
+
+							if (EaglerAdapter.getEventKeyState() && EaglerAdapter.getEventKey() == 54) {
+								this.displayGuiScreen(new PostModMenu());
 							}
 
 							if (EaglerAdapter.getEventKey() == 4 && this.gameSettings.keyBindFunction.pressed) {

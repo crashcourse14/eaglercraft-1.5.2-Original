@@ -4,9 +4,9 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import net.polarclient.Client;
-import net.polarclient.gui.mod.HudManager;
-import net.polarclient.gui.mod.HudMod;
+import net.liquidclient.Client;
+import net.liquidclient.gui.mod.HudManager;
+import net.liquidclient.gui.mod.HudMod;
 
 import net.lax1dude.eaglercraft.EaglerAdapter;
 import net.lax1dude.eaglercraft.EaglercraftRandom;

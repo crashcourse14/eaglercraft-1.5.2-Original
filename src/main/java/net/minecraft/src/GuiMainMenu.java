@@ -503,15 +503,11 @@ public class GuiMainMenu extends GuiScreen {
 		this.drawTexturedModalRect(var6 + 0, var7 + 0, 0, 0, 155, 44);
 		this.drawTexturedModalRect(var6 + 155, var7 + 0, 0, 45, 155, 44);
 
-		this.drawString(this.fontRenderer, "minecraft 1.5.2", 2, this.height - 20, 16777215);
-		this.drawString(this.fontRenderer, ConfigConstants.mainMenuString + EnumChatFormatting.GRAY + " (cracked)", 2, this.height - 10, 16777215);
+		this.drawString(this.fontRenderer, ConfigConstants.mainMenuString + EnumChatFormatting.GRAY + "Eaglercraft 1.5.2 (Archived)", 2, this.height, 16777215);
 
 		//String var10 = "Copyright " + Calendar.getInstance().get(Calendar.YEAR) + " Mojang AB.";
-		String var10 = "copyright 2013 Mojang AB";
-		this.drawString(this.fontRenderer, var10, this.width - this.fontRenderer.getStringWidth(var10) - 2, this.height - 10, 16777215);
-
-		var10 = "site resources are";
-		this.drawString(this.fontRenderer, var10, this.width - this.fontRenderer.getStringWidth(var10) - 2, this.height - 20, 16777215);
+		String var10 = "copyright 2013 Mojang AB, and 983kk";
+		this.drawString(this.fontRenderer, ConfigConstants.mainMenuString + EnumChatFormatting.GRAY + var10, this.width - this.fontRenderer.getStringWidth(var10) - 2, this.height - 10, 16777215);
 		
 		if(showingEndian && EaglerAdapter.isBigEndian()) {
 			this.drawCenteredString(fontRenderer, "(BIG Endian)", this.width / 2, this.height - 10, 0xFFFFBBBB);

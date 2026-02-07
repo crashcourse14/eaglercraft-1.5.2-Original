@@ -1,8 +1,8 @@
 package net.minecraft.src;
 
-import net.polarclient.event.events.EventUpdates;
-import net.polarclient.event.EventManager;
-import net.polarclient.event.Event;
+import net.liquidclient.event.events.EventUpdates;
+import net.liquidclient.event.EventManager;
+import net.liquidclient.event.Event;
 
 
 import java.io.ByteArrayOutputStream;
