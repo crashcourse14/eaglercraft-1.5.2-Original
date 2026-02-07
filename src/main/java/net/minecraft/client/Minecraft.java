@@ -348,7 +348,7 @@ public class Minecraft implements Runnable {
 		if(s != null) {
 			scr = new GuiScreenEditProfile(new GuiConnecting(new GuiMainMenu(), this, new ServerData("Eaglercraft Server", s, false)));
 		}else {
-			scr = new GuiScreenEditProfile(new GuiMainMenu());
+			scr = new GuiMainMenu();
 		}
 		
 		if(!LocalStorageManager.profileSettingsStorage.getBoolean("acceptLicense")) {
